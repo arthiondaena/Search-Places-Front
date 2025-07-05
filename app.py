@@ -19,7 +19,7 @@ user_prompt = st.text_input("Search Prompt", "")
 
 if st.button("Search") and user_prompt.strip():
     html_str = ""
-    with st.status("Starting...", expanded=True) as status:
+    with st.status("Searching...", expanded=True) as status:
         # response = requests.get(BACKEND_URL + "/run", params={"user_prompt": user_prompt})
         response = requests.post(BACKEND_URL, data={"user_prompt": user_prompt, "output_type": "html"})
         data = response.text
