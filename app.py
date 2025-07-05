@@ -28,12 +28,10 @@ if st.button("Search") and user_prompt.strip():
             html_str = data
         else:
             status.update(label="Error occurred while processing the request.", state="error", expanded=False)
-            logger.error(f"Error response: {data}")
-            st.error("An error occurred while processing your request. Please try again later.")
+            logger.error(f"{data}")
+            st.error(f"{data}")
 
     st.markdown("---")
 
     if html_str:
         st.html(html_str)
-    else:
-        st.error("No results found or an error occurred.")
