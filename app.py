@@ -8,7 +8,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-BACKEND_URL = "https://dyhkp3qhac5xo6q2vanctxrpdm0ejxnw.lambda-url.us-east-1.on.aws/"
+BACKEND_URL = "https://dyhkp3qhac5xo6q2vanctxrpdm0ejxnw.lambda-url.us-east-1.on.aws/?message=HelloWorld"
 
 st.set_page_config(page_title="Search Places", layout="centered")
 
@@ -21,7 +21,7 @@ if st.button("Search") and user_prompt.strip():
     html_str = ""
     with st.status("Searching...", expanded=True) as status:
         # response = requests.get(BACKEND_URL + "/run", params={"user_prompt": user_prompt})
-        response = requests.post(BACKEND_URL, data={"user_prompt": user_prompt, "output_type": "html"})
+        response = requests.post(BACKEND_URL, json={"user_prompt": user_prompt, "output_type": "html"}, headers={"Content-Type": "application/json"})
         data = response.text
         if data.startswith("<!DOCTYPE html>"):
             status.update(label="Done! See results below.", state="complete", expanded=False)
